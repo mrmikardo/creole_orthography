@@ -1,13 +1,19 @@
-from flask import Flask
+from flask import Flask, request, jsonify
+
+from api.transliterator import convert
 
 app = Flask(__name__)
 
 
-@app.route('/')
-def home():
-	return "<p>Hello, World!</p>"
+@app.route("/transliterate")
+def transliterate():
+    if not request.args:
+        return jsonify({"result": "No term provided"})
 
+    to_convert = request.args.get("term")
 
-@app.route('/about')
-def about():
-	return "About page"
+    if not to_convert:
+        result = "No term provided"
+
+    result = convert(to_convert)
+    return jsonify({"result": result.strip()})
