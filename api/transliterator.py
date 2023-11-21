@@ -85,7 +85,7 @@ def ident(string, normalize=False):
     return string
 
 
-def convert(string, start="fr", output="kv", norm="Y"):
+def convert(string, start="fr", output="dlc", norm="Y"):
     norm = norm == "Y"
     start = start.lower()
     output = output.lower()
